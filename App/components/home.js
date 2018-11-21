@@ -18,7 +18,6 @@ import SwipeCards from 'react-native-swipe-cards';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
 
-
 var image1 = require('../images/image1.jpeg')
 var image2 = require('../images/image2.jpeg')
 var image3 = require('../images/image3.jpeg')
@@ -81,26 +80,41 @@ export default class Home extends Component {
     return (
       <View style={styles.card}>
         <Image source ={x.image} resizeMode="contain" style ={{width:350, height:350}} />
-        <View style={{width:350, height:70, flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-        <View style={{flexDirection:'row', margin:15, marginTop:25,}} >
-        <Text style={{fontSize:20, fontWeight:'300', color:'#444'}}>{x.first_name}, </Text>
-        <Text style={{fontSize:21, fontWeight:'200', color:'#444'}}>{x.age}</Text>
-        </View>
-        <View style={{flexDirection:'row'}}>
-        <View style={{padding:13,  borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}><Icon name='people-outline' size={20} color="#777" style={{}} /><Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.friends}</Text></View>
-        <View style={{padding:13, borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}><Icon name='import-contacts' size={20} color="#777" /><Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.interests}</Text></View>
-        </View>
+        <View 
+          style={{ 
+            width:350, 
+            height:70, 
+            flexDirection:'row', 
+            alignItems:'center', 
+            justifyContent:'space-between'
+          }}>
+          <View style={{flexDirection:'row', margin:15, marginTop:25,}} >
+            <Text style={{fontSize:20, fontWeight:'300', color:'#444'}}>{x.first_name}, </Text>
+            <Text style={{fontSize:21, fontWeight:'200', color:'#444'}}>{x.age}</Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={{padding:13,  borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}>
+              <Icon name='people-outline' size={20} color="#777" style={{}} />
+              <Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.friends}</Text>
+            </View>
+            <View style={{padding:13, borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}>
+              <Icon name='import-contacts' size={20} color="#777" />
+              <Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.interests}</Text>
+            </View>
+          </View>
         </View>
       </View>
     )
   }
-    handleYup (card) {
+
+  handleYup (card) {
     console.log(`Yup for ${card.text}`)
   }
 
   handleNope (card) {
     console.log(`Nope for ${card.text}`)
   }
+
   noMore(){
     return (
       <View style={styles.card} >
@@ -111,36 +125,45 @@ export default class Home extends Component {
 
   yup(){
     console.log(this.refs['swiper'])
-this.refs['swiper']._goToNextCard()  }
+    this.refs['swiper']._goToNextCard()  
+  }
 
-nope(){
+  nope(){
     console.log(this.refs['swiper'])
-this.refs['swiper']._goToNextCard()  }
+    this.refs['swiper']._goToNextCard()  
+  }
 
   render() {
     return (
       <View style={styles.container}>
-           <Nav chat = {() => this.props.navigator.replace({id: "messages"})} toProfile = {() => this.props.navigator.replace({id:'profile'})} />
-      <SwipeCards
-        ref = {'swiper'}
-        cards={this.state.cards}
-        containerStyle = {{  backgroundColor: '#f7f7f7', alignItems:'center', margin:20}}
-        renderCard={(cardData) => this.Card(cardData)}
-        renderNoMoreCards={() => this.noMore()}
-        handleYup={this.handleYup}
-        handleNope={this.handleNope} />
+        <Nav chat = {() => this.props.navigator.replace({id: "messages"})} toProfile = {() => this.props.navigator.replace({id:'profile'})} />
+        <SwipeCards
+          ref = {'swiper'}
+          cards={this.state.cards}
+          containerStyle = {{ 
+            backgroundColor: '#f7f7f7', 
+            alignItems:'center', 
+            margin:20
+          }}
+          renderCard={(cardData) => this.Card(cardData)}
+          renderNoMoreCards={() => this.noMore()}
+          handleYup={this.handleYup}
+          handleNope={this.handleNope} 
+          yupText={"Bixinha"} 
+          noText={"Cansaço"}
+        />
         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-        <TouchableOpacity style = {styles.buttons} onPress = {() => this.nope()}>
-        <Iconz name='ios-close' size={45} color="#888" style={{}} />
-        </TouchableOpacity>
-        <TouchableOpacity style = {styles.buttonSmall}>
-        <Iconz name='ios-information' size={25} color="#888" style={{}} />
-        </TouchableOpacity>
-        <TouchableOpacity style = {styles.buttons} onPress = {() => this.yup()}>
-        <Iconz name='ios-heart-outline' size={36} color="#888" style={{marginTop:5}} />
-        </TouchableOpacity>
+          <TouchableOpacity style = {styles.buttons} onPress = {() => this.nope()}>
+            <Iconz name='ios-close' size={45} color="#888" style={{}} />
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.buttonSmall}>
+            <Iconz name='ios-information' size={25} color="#888" style={{}} />
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.buttons} onPress = {() => this.yup()}>
+            <Iconz name='ios-heart-outline' size={36} color="#888" style={{marginTop:5}} />
+          </TouchableOpacity>
         </View>
-        </View>
+      </View>
     )
 }
 }
@@ -149,7 +172,6 @@ this.refs['swiper']._goToNextCard()  }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: '#f7f7f7',
   },
   buttons:{
